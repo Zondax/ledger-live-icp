@@ -1,0 +1,4 @@
+projectName: ledger-live-icp
+templates:
+  - template: templates/basic-ts
+  - template: templates/publish-npm

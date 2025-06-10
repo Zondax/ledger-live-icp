@@ -1,0 +1,11 @@
+// tsconfig.cjs.json
+{
+  "extends": "./tsconfig.base.json", // Inherit common settings
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node10",
+    "verbatimModuleSyntax": false,
+    "outDir": "./dist/cjs",
+    "declarationDir": "./dist/cjs"
+  }
+}

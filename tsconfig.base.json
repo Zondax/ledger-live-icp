@@ -1,0 +1,26 @@
+// tsconfig.base.json
+{
+  "compilerOptions": {
+    "typeRoots": ["node_modules/@types"],
+    "target": "ESNext",
+    "moduleResolution": "node10",
+    "lib": ["es2020", "dom"],
+    "sourceMap": true,
+    "rootDir": "src",
+    "strict": true,
+    "skipLibCheck": true,
+    "types": ["node", "jest"],
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "allowSyntheticDefaultImports": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "removeComments": true,
+    "declaration": true // Important: Generate .d.ts files for both outputs
+  },
+  "include": ["src/**/*.ts"], // Ensure your source files are included
+  "exclude": ["node_modules", "dist"] // Exclude these directories from compilation
+}

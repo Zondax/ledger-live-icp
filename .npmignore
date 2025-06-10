@@ -1,0 +1,7 @@
+node_modules
+.*
+jest.config.json
+yarn-error.log
+zondax-cli*
+src/tools/*.test.ts
+src/testcases

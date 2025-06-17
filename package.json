@@ -69,7 +69,7 @@
     "ts-jest": "^29.4.0",
     "jest": "^30.0.0",
     "@types/invariant": "^2.2.37",
-    "@types/jest": "^29.5.14",
+    "@types/jest": "^30.0.0",
     "@types/node": "^24.0.0",
     "prettier": "^3.5.3",
     "typescript": "^5.8.3",

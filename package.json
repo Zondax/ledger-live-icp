@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "ICP ledger live integration bridge library for Ledger Live",
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",

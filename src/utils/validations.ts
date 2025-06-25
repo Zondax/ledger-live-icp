@@ -11,11 +11,11 @@ export const validatePrincipal = (principal: string): { isValid: boolean; error?
   }
 }
 
-export async function validateAddress(address: string): Promise<{ isValid: boolean; error?: string }> {
+export function validateAddress(address: string): { isValid: boolean; error?: string } {
   const defaultError = 'Invalid address, account identifier could not be created.'
   try {
     const accId = AccountIdentifier.fromHex(address)
-    if (!accId) {
+    if (!accId || !accId.toHex()) {
       return { isValid: false, error: defaultError }
     }
     return { isValid: true }

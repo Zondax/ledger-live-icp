@@ -1,4 +1,3 @@
-export * from '@dfinity/candid'
 export * from './canisterIDL'
 export * from '@dfinity/ledger-icp'
 export * from '@dfinity/principal'

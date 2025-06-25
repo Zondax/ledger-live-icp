@@ -33,8 +33,8 @@ importers:
         specifier: ^1.8.0
         version: 1.8.0
       bignumber.js:
-        specifier: 9.1.2
-        version: 9.1.2
+        specifier: 9.3.0
+        version: 9.3.0
       browser-env:
         specifier: ^3.3.0
         version: 3.3.0
@@ -1057,8 +1057,8 @@ packages:
   bcrypt-pbkdf@1.0.2:
     resolution: {integrity: sha512-qeFIXtP4MSoi6NLqO12WfqARWWuCKi2Rn/9hJLEmtB5yTNr9DqFWkJRCf2qShWzPeAMRnOgCrq0sg/KLv5ES9w==}
 
-  bignumber.js@9.1.2:
-    resolution: {integrity: sha512-2/mKyZH9K85bzOEfhXDBFZTGd1CTs+5IHpeFQo9luiBG7hghdC851Pj2WAhb6E3R6b9tZj/XKhbg4fum+Kepug==}
+  bignumber.js@9.3.0:
+    resolution: {integrity: sha512-EM7aMFTXbptt/wZdMlBv2t8IViwQL+h6SLHosp8Yf0dqJMTnY6iL32opnAB6kAdL0SZPuvcAzFr31o0c/R3/RA==}
 
   borc@2.1.2:
     resolution: {integrity: sha512-Sy9eoUi4OiKzq7VovMn246iTo17kzuyHJKomCfpWMlI6RpfN1gk95w7d7gH264nApVLg0HZfcpz62/g4VH1Y4w==}
@@ -3560,11 +3560,11 @@ snapshots:
     dependencies:
       tweetnacl: 0.14.5
 
-  bignumber.js@9.1.2: {}
+  bignumber.js@9.3.0: {}
 
   borc@2.1.2:
     dependencies:
-      bignumber.js: 9.1.2
+      bignumber.js: 9.3.0
       buffer: 5.7.1
       commander: 2.20.3
       ieee754: 1.2.1

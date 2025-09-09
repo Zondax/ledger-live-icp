@@ -7,29 +7,36 @@
   ],
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
+  "browser": "dist/browser/index.js",
   "exports": {
     ".": {
       "require": "./dist/cjs/index.js",
+      "browser": "./dist/browser/index.js",
       "default": "./dist/esm/index.js"
     },
     "./canisterIDL": {
       "require": "./dist/cjs/canisterIDL.js",
+      "browser": "./dist/browser/canisterIDL.js",
       "default": "./dist/esm/canisterIDL.js"
     },
     "./utils": {
       "require": "./dist/cjs/utils/index.js",
+      "browser": "./dist/browser/utils/index.js",
       "default": "./dist/esm/utils/index.js"
     },
     "./agent": {
       "require": "./dist/cjs/agent.js",
+      "browser": "./dist/browser/agent.js",
       "default": "./dist/esm/agent.js"
     },
     "./nns": {
       "require": "./dist/cjs/nns.js",
+      "browser": "./dist/browser/nns.js",
       "default": "./dist/esm/nns.js"
     },
     "./neurons": {
       "require": "./dist/cjs/neurons/index.js",
+      "browser": "./dist/browser/neurons/index.js",
       "default": "./dist/esm/neurons/index.js"
     }
   },
@@ -65,6 +72,8 @@
     "invariant": "^2.2.4"
   },
   "devDependencies": {
+    "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
+    "@esbuild-plugins/node-modules-polyfill": "^0.2.2",
     "@eslint/js": "^9.29.0",
     "@types/invariant": "^2.2.37",
     "@types/jest": "^29.5.14",

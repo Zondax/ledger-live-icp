@@ -1,7 +1,10 @@
 export * from './canisterIDL'
 export * from '@dfinity/ledger-icp'
-export * from '@dfinity/principal'
 export * from './utils'
+
+// Explicitly export commonly used items from @dfinity/principal
+export { Principal } from '@dfinity/principal'
+export * from '@dfinity/principal'
 
 export { Secp256k1PublicKey } from '@dfinity/identity-secp256k1'
 export { GovernanceCanister } from '@dfinity/nns'

@@ -73,4 +73,6 @@ export const pollForReadState = async (host: string, payload: Buffer, canisterId
   return reply
 }
 
+// Explicitly export commonly used items from @dfinity/agent
+export { Cbor, HttpAgent, Certificate, bufFromBufLike, lookupResultToBuffer } from '@dfinity/agent'
 export * from '@dfinity/agent'

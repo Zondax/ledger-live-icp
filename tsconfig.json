@@ -3,7 +3,7 @@
   "compilerOptions": {
     "typeRoots": ["node_modules/@types"],
     "target": "ESNext",
-    "moduleResolution": "node10",
+    "module": "nodenext",
     "lib": ["es2020", "dom"],
     "sourceMap": true,
     "rootDir": "src",

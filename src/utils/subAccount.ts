@@ -1,10 +1,23 @@
 import { asciiStringToByteArray, arrayOfNumberToUint8Array, uint8ArrayToBigInt } from './index'
-import { sha256 } from '@noble/hashes/sha256'
+import { sha256 } from '@noble/hashes/sha2'
 import invariant from 'invariant'
 import { Principal } from '@dfinity/principal'
-import { randomBytes } from 'crypto'
 import { SubAccount, AccountIdentifier } from '@dfinity/ledger-icp'
 import { derivePrincipalFromPubkey } from './pubKey'
+
+// Cross-platform random bytes generation
+const getRandomBytes = async (length: number): Promise<Uint8Array> => {
+  if (typeof window !== 'undefined' && window.crypto) {
+    // Browser environment
+    const bytes = new Uint8Array(length)
+    window.crypto.getRandomValues(bytes)
+    return bytes
+  } else {
+    // Node.js environment
+    const crypto = await import('crypto')
+    return new Uint8Array(crypto.randomBytes(length))
+  }
+}
 
 const getNeuronStakeSubAccountBytes = (nonce: Uint8Array, principal: Principal): Uint8Array => {
   const padding = asciiStringToByteArray('neuron-stake')
@@ -14,8 +27,8 @@ const getNeuronStakeSubAccountBytes = (nonce: Uint8Array, principal: Principal):
   return shaObj.digest()
 }
 
-export const getSubAccountIdentifier = (govCanisterId: string, pubkey: string): { identifier: string; nonce: string } => {
-  const nonceBytes = new Uint8Array(randomBytes(8))
+export const getSubAccountIdentifier = async (govCanisterId: string, pubkey: string): Promise<{ identifier: string; nonce: string }> => {
+  const nonceBytes = await getRandomBytes(8)
   const nonce = uint8ArrayToBigInt(nonceBytes)
 
   const toSubAccount = SubAccount.fromBytes(getNeuronStakeSubAccountBytes(nonceBytes, derivePrincipalFromPubkey(pubkey)))

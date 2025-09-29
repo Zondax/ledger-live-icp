@@ -69,6 +69,7 @@
     "bignumber.js": "9.1.2",
     "browser-env": "^3.3.0",
     "cbor": "^10.0.3",
+    "esbuild-plugin-polyfill-node": "^0.3.0",
     "invariant": "^2.2.4"
   },
   "devDependencies": {

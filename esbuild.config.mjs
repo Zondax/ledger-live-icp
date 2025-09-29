@@ -3,8 +3,7 @@ import { dtsPlugin } from 'esbuild-plugin-d.ts'
 import path from 'path'
 import wildcardImports from 'esbuild-plugin-wildcard-imports'
 import { fileURLToPath } from 'url'
-import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill'
-import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
+import { polyfillNode } from 'esbuild-plugin-polyfill-node'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -30,14 +29,22 @@ await Promise.all([
     target: ['chrome90', 'firefox88', 'safari14', 'edge90'],
     sourcemap: true,
     plugins: [
-      NodeGlobalsPolyfillPlugin({
-        buffer: true,
-        process: true,
+      polyfillNode({
+        globals: {
+          global: true,
+          buffer: true,
+          process: true,
+        },
+        polyfills: {
+          crypto: true,
+        },
       }),
-      NodeModulesPolyfillPlugin(),
       dtsPlugin(),
       wildcardImports(),
     ],
+    define: {
+      global: 'globalThis',
+    },
   }),
   build({
     entryPoints,

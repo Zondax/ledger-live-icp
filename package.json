@@ -5,38 +5,38 @@
   "files": [
     "dist"
   ],
+  "browser": "dist/browser/index.js",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
-  "browser": "dist/browser/index.js",
   "exports": {
     ".": {
-      "require": "./dist/cjs/index.js",
       "browser": "./dist/browser/index.js",
+      "require": "./dist/cjs/index.js",
       "default": "./dist/esm/index.js"
     },
     "./canisterIDL": {
-      "require": "./dist/cjs/canisterIDL.js",
       "browser": "./dist/browser/canisterIDL.js",
+      "require": "./dist/cjs/canisterIDL.js",
       "default": "./dist/esm/canisterIDL.js"
     },
     "./utils": {
-      "require": "./dist/cjs/utils/index.js",
       "browser": "./dist/browser/utils/index.js",
+      "require": "./dist/cjs/utils/index.js",
       "default": "./dist/esm/utils/index.js"
     },
     "./agent": {
-      "require": "./dist/cjs/agent.js",
       "browser": "./dist/browser/agent.js",
+      "require": "./dist/cjs/agent.js",
       "default": "./dist/esm/agent.js"
     },
     "./nns": {
-      "require": "./dist/cjs/nns.js",
       "browser": "./dist/browser/nns.js",
+      "require": "./dist/cjs/nns.js",
       "default": "./dist/esm/nns.js"
     },
     "./neurons": {
-      "require": "./dist/cjs/neurons/index.js",
       "browser": "./dist/browser/neurons/index.js",
+      "require": "./dist/cjs/neurons/index.js",
       "default": "./dist/esm/neurons/index.js"
     }
   },

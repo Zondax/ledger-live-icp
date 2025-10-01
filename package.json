@@ -7,41 +7,43 @@
   ],
   "browser": "dist/browser/index.js",
   "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
   "exports": {
     ".": {
-      "browser": "./dist/browser/index.js",
       "require": "./dist/cjs/index.js",
-      "default": "./dist/esm/index.js"
+      "browser": "./dist/browser/index.js",
+      "default": "./dist/cjs/index.js"
     },
     "./canisterIDL": {
-      "browser": "./dist/browser/canisterIDL.js",
       "require": "./dist/cjs/canisterIDL.js",
-      "default": "./dist/esm/canisterIDL.js"
+      "browser": "./dist/browser/canisterIDL.js",
+      "default": "./dist/cjs/canisterIDL.js"
     },
     "./utils": {
-      "browser": "./dist/browser/utils/index.js",
       "require": "./dist/cjs/utils/index.js",
-      "default": "./dist/esm/utils/index.js"
+      "browser": "./dist/browser/utils/index.js",
+      "default": "./dist/cjs/utils/index.js"
     },
     "./agent": {
-      "browser": "./dist/browser/agent.js",
       "require": "./dist/cjs/agent.js",
-      "default": "./dist/esm/agent.js"
+      "browser": "./dist/browser/agent.js",
+      "default": "./dist/cjs/agent.js"
     },
     "./nns": {
-      "browser": "./dist/browser/nns.js",
       "require": "./dist/cjs/nns.js",
-      "default": "./dist/esm/nns.js"
+      "browser": "./dist/browser/nns.js",
+      "default": "./dist/cjs/nns.js"
     },
     "./neurons": {
-      "browser": "./dist/browser/neurons/index.js",
       "require": "./dist/cjs/neurons/index.js",
-      "default": "./dist/esm/neurons/index.js"
+      "browser": "./dist/browser/neurons/index.js",
+      "default": "./dist/cjs/neurons/index.js"
     }
   },
   "scripts": {
-    "build": "pnpm clean && node esbuild.config.mjs",
+    "build": "pnpm clean && pnpm convert:idl && node esbuild.config.mjs && pnpm copy:idl",
+    "copy:idl": "cp -r idl-cjs dist/",
+    "convert:idl": "bun scripts/convert-idl.ts",
     "clean": "rm -rf dist",
     "dev": "tsc --watch",
     "format": "prettier --write \"src/**/*.ts\"",
@@ -69,7 +71,9 @@
     "bignumber.js": "9.1.2",
     "browser-env": "^3.3.0",
     "cbor": "^10.0.3",
+    "esbuild-plugin-import-pattern": "^0.1.0",
     "esbuild-plugin-polyfill-node": "^0.3.0",
+    "glob": "^11.0.3",
     "invariant": "^2.2.4"
   },
   "devDependencies": {
@@ -79,6 +83,7 @@
     "@types/invariant": "^2.2.37",
     "@types/jest": "^29.5.14",
     "@types/node": "^24.0.0",
+    "bun": "^1.2.23",
     "esbuild": "^0.25.5",
     "esbuild-plugin-d.ts": "^1.3.1",
     "esbuild-plugin-wildcard-imports": "^0.0.15",

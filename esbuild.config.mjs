@@ -1,25 +1,12 @@
 import { build } from 'esbuild'
 import { dtsPlugin } from 'esbuild-plugin-d.ts'
-import path from 'path'
-import wildcardImports from 'esbuild-plugin-wildcard-imports'
-import { fileURLToPath } from 'url'
+import { importPatternPlugin } from 'esbuild-plugin-import-pattern'
+import { execSync } from 'child_process'
 import { polyfillNode } from 'esbuild-plugin-polyfill-node'
+import { glob } from 'glob'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-
-const entryPoints = ['src/index.ts', 'src/canisterIDL.ts', 'src/utils/index.ts', 'src/agent.ts', 'src/nns.ts', 'src/neurons/index.ts']
+const entryPoints = glob.sync('src/**/*.ts').filter(file => !file.includes('.test.ts'))
 await Promise.all([
-  build({
-    entryPoints,
-    outdir: 'dist/cjs',
-    bundle: true,
-    platform: 'node',
-    format: 'cjs',
-    target: 'node18',
-    sourcemap: true,
-    plugins: [dtsPlugin(), wildcardImports()],
-  }),
   build({
     entryPoints,
     outdir: 'dist/browser',
@@ -27,7 +14,6 @@ await Promise.all([
     platform: 'browser',
     format: 'esm',
     target: ['chrome90', 'firefox88', 'safari14', 'edge90'],
-    sourcemap: true,
     plugins: [
       polyfillNode({
         globals: {
@@ -37,34 +23,20 @@ await Promise.all([
         },
         polyfills: {
           crypto: true,
+          url: true,
         },
       }),
       dtsPlugin(),
-      wildcardImports(),
+      importPatternPlugin(),
     ],
     define: {
       global: 'globalThis',
     },
   }),
-  build({
-    entryPoints,
-    outdir: 'dist/esm',
-    bundle: true,
-    platform: 'node',
-    format: 'esm',
-    target: 'node18',
-    sourcemap: true,
-    plugins: [dtsPlugin(), wildcardImports()],
-    alias: {
-      '@dfinity/principal': path.resolve(__dirname, 'node_modules/@dfinity/principal/lib/esm/index.js'),
-      '@dfinity/utils': path.resolve(__dirname, 'node_modules/@dfinity/utils/dist/esm/index.js'),
-      '@dfinity/agent': path.resolve(__dirname, 'node_modules/@dfinity/agent/lib/esm/index.js'),
-      '@dfinity/candid': path.resolve(__dirname, 'node_modules/@dfinity/candid/lib/esm/index.js'),
-      '@dfinity/identity-secp256k1': path.resolve(__dirname, 'node_modules/@dfinity/identity-secp256k1/lib/esm/index.js'),
-      '@dfinity/ledger-icp/dist/candid': path.resolve(__dirname, 'node_modules/@dfinity/ledger-icp/dist/candid'),
-      '@dfinity/ledger-icp': path.resolve(__dirname, 'node_modules/@dfinity/ledger-icp/dist/esm/index.js'),
-      '@dfinity/nns/dist/candid': path.resolve(__dirname, 'node_modules/@dfinity/nns/dist/candid'),
-      '@dfinity/nns': path.resolve(__dirname, 'node_modules/@dfinity/nns/dist/esm/index.js'),
-    },
-  }),
 ])
+
+// Use TypeScript compiler for CommonJS build
+execSync('tsc --module commonjs --outDir dist/cjs', { stdio: 'inherit' })
+
+// Generate types with TypeScript compiler
+execSync('tsc --emitDeclarationOnly --outDir dist/types', { stdio: 'inherit' })

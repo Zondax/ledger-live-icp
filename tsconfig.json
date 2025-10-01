@@ -2,15 +2,17 @@
 {
   "compilerOptions": {
     "typeRoots": ["node_modules/@types"],
-    "target": "ESNext",
-    "module": "nodenext",
-    "lib": ["es2020", "dom"],
+    "target": "ES2020",                
+    "module": "es2022",              
+    "moduleResolution": "node",
+    "lib": ["ES2022", "DOM"],
     "sourceMap": true,
     "rootDir": "src",
     "strict": true,
     "skipLibCheck": true,
     "types": ["node", "jest"],
     "esModuleInterop": true,
+    "outDir": "dist/cjs",
     "resolveJsonModule": true,
     "baseUrl": ".",
     "allowSyntheticDefaultImports": true,
@@ -19,8 +21,10 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "removeComments": true,
-    "declaration": true // Important: Generate .d.ts files for both outputs
+    "declaration": true,
+    "forceConsistentCasingInFileNames": true,
   },
-  "include": ["src/**/*.ts"], // Ensure your source files are included
-  "exclude": ["node_modules", "dist"] // Exclude these directories from compilation
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }
+

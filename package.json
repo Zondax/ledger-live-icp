@@ -68,7 +68,7 @@
     "@dfinity/principal": "^2.4.1",
     "@dfinity/utils": "^2.13.0",
     "@noble/hashes": "^1.8.0",
-    "bignumber.js": "9.1.2",
+    "bignumber.js": "9.3.1",
     "browser-env": "^3.3.0",
     "cbor": "^10.0.3",
     "esbuild-plugin-import-pattern": "^0.1.0",

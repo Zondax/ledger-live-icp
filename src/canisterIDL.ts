@@ -1,10 +1,6 @@
 import { IDL } from '@dfinity/candid'
 import invariant from 'invariant'
-
-// Import from the converted CommonJS files
-// These will be copied to dist/idl-cjs during build
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const { ledgerIdlFactory, indexIdlFactory, governanceIdlFactory, governanceIdlFactoryOld } = require('../idl-cjs/index.cjs')
+import { ledgerIdlFactory, indexIdlFactory, governanceIdlFactory, governanceIdlFactoryOld } from './internal/idl-adapters'
 
 export const getCanisterIdlFunc = (idlFactory: IDL.InterfaceFactory, methodName: string) => {
   const func = idlFactory({ IDL })._fields.find((f: any) => f[0] === methodName)

@@ -4,7 +4,6 @@ import { glob } from 'glob'
 import { promises as fs } from 'fs'
 import { dtsPlugin } from 'esbuild-plugin-d.ts'
 import { importPatternPlugin } from 'esbuild-plugin-import-pattern'
-import { polyfillNode } from 'esbuild-plugin-polyfill-node'
 
 // ============================================================================
 // Plugins
@@ -17,12 +16,9 @@ import { polyfillNode } from 'esbuild-plugin-polyfill-node'
 const createBrowserAdapterPlugin = () => ({
   name: 'browser-adapter-resolve',
   setup(build) {
-    build.onLoad({ filter: /canisterIDL\.ts$/ }, async (args) => {
+    build.onLoad({ filter: /canisterIDL\.ts$/ }, async args => {
       const contents = await fs.readFile(args.path, 'utf8')
-      const transformed = contents.replace(
-        /from ['"]\.\/internal\/idl-adapters['"]/g,
-        "from './internal/idl-adapters.browser'"
-      )
+      const transformed = contents.replace(/from ['"]\.\/internal\/idl-adapters['"]/g, "from './internal/idl-adapters.browser'")
       return { contents: transformed, loader: 'ts' }
     })
   },
@@ -44,15 +40,7 @@ const browserBuildOptions = {
   define: {
     global: 'globalThis',
   },
-  plugins: [
-    createBrowserAdapterPlugin(),
-    polyfillNode({
-      globals: { global: true, buffer: true, process: true },
-      polyfills: { crypto: true, url: true },
-    }),
-    dtsPlugin(),
-    importPatternPlugin(),
-  ],
+  plugins: [createBrowserAdapterPlugin(), dtsPlugin(), importPatternPlugin()],
 }
 
 // ============================================================================

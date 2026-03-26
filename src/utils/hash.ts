@@ -1,5 +1,5 @@
 import cbor from 'cbor'
-import crypto from 'crypto'
+import { sha256 } from '@noble/hashes/sha2'
 
 export function encode(...value: any): Buffer {
   const encoder = new cbor.Encoder({ canonical: true })
@@ -72,8 +72,6 @@ export function hashTransaction({
     created_at_time,
   })
 
-  const hash = crypto.createHash('sha256')
-  hash.update(Buffer.from(serialized, 'hex'))
-  const hashBuffer = hash.digest()
+  const hashBuffer = sha256(Buffer.from(serialized, 'hex'))
   return Buffer.from(hashBuffer).toString('hex')
 }

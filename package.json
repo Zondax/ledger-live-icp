@@ -57,6 +57,10 @@
     "ledger",
     "ledger-live"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Zondax/ledger-live-icp"
+  },
   "author": "zondax",
   "license": "Apache-2.0",
   "dependencies": {
